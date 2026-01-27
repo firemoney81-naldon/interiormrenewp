@@ -1,23 +1,330 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+
+
+    <!-- SEO를 위한 JSON-LD 구조화 데이터 마크업 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "파주 인테리어 전문 컨설팅 및 업체 비교",
+      "image": "https://paju-interior-example.com/logo.png",
+      "url": "https://paju-interior-example.com/paju-interior-guide",
+      "telephone": "1661-XXXX",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "경기 파주시 파주읍 연풍로 123",
+        "addressLocality": "파주시",
+        "addressRegion": "경기",
+        "postalCode": "10850",
+        "addressCountry": "KR"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "파주시"
+      },
+      "priceRange": "₩₩₩",
+      "description": "파주 아파트, 빌라, 주택 인테리어 및 리모델링 전문가이드. 2026년 인테리어 트렌드를 반영한 견적 비용, 장단점 분석 및 믿을 수 있는 지역 업체 추천 정보."
+    }
+    </script>
+
+    <style>
+        /* 기본 스타일 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.8; margin: 0; padding: 0; background-color: #f5f7f9; color: #333; }
+        header { background-color: #ffffff; padding: 40px 15px; text-align: center; border-bottom: 5px solid #004aad; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        h1 { font-size: 2.5em; color: #004aad; margin-bottom: 10px; font-weight: 700; }
+        h2 { font-size: 2em; color: #1a1a1a; margin-top: 40px; border-left: 5px solid #ff9900; padding-left: 15px; font-weight: 600; }
+        h3 { font-size: 1.5em; color: #004aad; margin-top: 30px; border-bottom: 2px solid #eee; padding-bottom: 5px; font-weight: 500; }
+        p { margin-bottom: 15px; color: #555; font-size: 1.05em; }
+        ul, ol { padding-left: 25px; margin-bottom: 20px; color: #555; }
+        li { margin-bottom: 10px; line-height: 1.7; }
+        section { max-width: 900px; margin: 20px auto; padding: 30px 25px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+
+        /* CTA 버튼 스타일 */
+        .btn-cta {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(to right, #004aad, #0070f3);
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: 700;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 75, 173, 0.4);
+            transition: all 0.3s ease;
+            text-align: center;
+            margin-top: 25px;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+        .btn-cta:hover {
+            background: linear-gradient(to right, #003a8a, #005bb5);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(0, 75, 173, 0.5);
+        }
+
+        /* 표 스타일 */
+        table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 20px 0; background-color: #f9f9f9; border-radius: 8px; overflow: hidden; }
+        th, td { border: none; padding: 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #e6eefc; color: #004aad; font-weight: 700; text-align: center; }
+        td:first-child { font-weight: 500; color: #004aad; }
+        tr:nth-child(even) { background-color: #f3f6fa; }
+
+        /* 네비게이션 스타일 */
+        nav { max-width: 900px; margin: 20px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        nav ul { list-style: none; padding: 15px 25px; display: flex; flex-wrap: wrap; justify-content: space-between; margin: 0; }
+        nav li { margin: 0 10px; }
+        nav a { color: #333; font-weight: 500; padding: 10px 0; display: block; text-decoration: none; transition: color 0.3s; }
+        nav a:hover { color: #004aad; text-decoration: underline; }
+
+        /* 폼 스타일 */
+        form { background: #ffffff; padding: 25px; border-radius: 8px; border: 1px solid #e0e0e0; margin-top: 20px; }
+        label { display: block; font-weight: 600; color: #333; margin-top: 15px; margin-bottom: 5px; }
+        input[type="text"], input[type="tel"], select, textarea { width: calc(100% - 22px); padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 1em; }
+        textarea { resize: vertical; }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            section { margin: 10px auto; padding: 20px; }
+            nav ul { flex-direction: column; align-items: center; }
+            nav li { margin: 5px 0; }
+        }
+
+        /* 앵커 오프셋 */
+        .anchor { display: block; position: relative; top: -100px; visibility: hidden; }
+
+        /* 강조 텍스트 */
+        .highlight { font-weight: bold; color: #d9534f; }
+        .success { color: #5cb85c; font-weight: bold; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>파주 인테리어 전문가이드: 2026년 최신 비용 견적 및 추천 업체 TOP 5</h1>
+        <p>파주 아파트, 빌라, 주택 리모델링 완벽 가이드. 투명한 비용 분석부터 최신 트렌드까지 한 번에!</p>
+        <a href="#contact" class="btn-cta">실시간 견적 상담 요청하기</a>
+    </header>
+
+    <nav aria-label="페이지 내 이동">
+        <ul>
+            <li><a href="#trend-analysis">2026년 트렌드 분석</a></li>
+            <li><a href="#local-analysis">파주 지역 인테리어 특징</a></li>
+            <li><a href="#cost-guide">인테리어 비용 가이드</a></li>
+            <li><a href="#top5-companies">추천 업체 TOP 5</a></li>
+            <li><a href="#checklist">필수 체크리스트</a></li>
+            <li><a href="#contact">견적 상담 문의</a></li>
+        </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <section id="trend-analysis">
+        <span id="trend-analysis-anchor" class="anchor"></span>
+        <h2>2026년 인테리어 트렌드 분석: 파주를 위한 특별한 디자인 제안</h2>
+        <p>2026년은 주거 공간이 단순히 잠자는 곳을 넘어 개인의 취향과 라이프스타일을 반영하는 '맞춤형 공간'으로 진화하는 해가 될 것입니다. 파주 지역은 신축 아파트와 자연 친화적인 주거 환경이 공존하는 특성상, 이러한 트렌드가 더욱 빠르게 확산되고 있습니다. 최근 주목받는 3가지 핵심 키워드를 통해 파주 인테리어의 방향성을 제시합니다.</p>
+
+        <h3>1. 뉴트럴 톤과 자연 소재의 결합: 'Livable Luxury'</h3>
+        <p>지나치게 화려한 색상보다는 베이지, 웜 그레이, 세이지 그린 등 자연에서 영감을 받은 뉴트럴 톤이 강세를 보입니다. 특히 파주 운정신도시와 같이 쾌적한 환경을 선호하는 주거 지역에서는 'Livable Luxury'라는 개념이 중요해지고 있습니다. 이는 <span class="highlight">편안함과 고급스러움을 동시에 추구</span>하는 디자인으로, 천연 원목, 포세린 타일, 리넨 등의 자연 소재를 활용하여 집 안에서도 힐링을 느낄 수 있도록 합니다. 파주 야당동의 아파트 인테리어 사례에서 볼 수 있듯이, 거실 아트월에 포세린 타일을 적용하거나 톤 다운된 우드 마루를 사용하여 차분하고 세련된 분위기를 연출하는 것이 핵심입니다.</p>
+
+        <h3>2. 다기능 공간과 유연한 레이아웃: '하이브리드 공간'</h3>
+        <p>재택근무의 확산과 1인 가구 증가로 인해 공간의 용도를 명확히 구분하기보다는 필요에 따라 유연하게 변형할 수 있는 하이브리드 공간이 대세입니다. 거실과 주방의 경계를 허물고, 주방을 단순히 조리 공간이 아닌 <span class="highlight">가족 간의 소통 공간(리빙 다이닝룸)</span>으로 확장하는 추세입니다. 또한 서재, 홈짐, 취미 공간 등 개인의 활동을 위한 '멀티 스페이스'를 확보하는 것도 중요한 트렌드입니다. 파주 지역의 아파트 인테리어에서는 이러한 유연한 공간 구성을 위해 폴딩도어를 설치하거나 슬라이딩 도어를 활용하여 공간 분할을 자유롭게 하는 디자인이 인기를 얻고 있습니다.</p>
+
+        <h3>3. 스마트 홈 기술과 지속 가능한 디자인: '필코노미'</h3>
+        <p>IoT(사물인터넷) 기술의 발전으로 조명, 온도 조절, 보안 등 인테리어의 모든 요소를 스마트폰으로 제어하는 스마트 홈 시스템이 보편화됩니다. 2026년에는 '필코노미(Feel-conomy)'라는 트렌드에 따라 <span class="highlight">감성적인 만족감</span>을 극대화하는 인테리어가 중요해집니다. 에너지 효율을 높이는 친환경 자재 사용이나 그린 리모델링(단열, 창호 교체 등)에 대한 관심도 높아지고 있습니다. 특히 파주 금촌 팜스프링 아파트 시공 사례처럼 오래된 아파트의 경우, 단열을 강화하는 샤시 교체 공사가 인테리어의 필수적인 부분이 되었습니다.</p>
+
+        <a href="#contact" class="btn-cta">트렌드를 반영한 맞춤 디자인 견적 요청</a>
+    </section>
+
+    <section id="local-analysis">
+        <span id="local-analysis-anchor" class="anchor"></span>
+        <h2>파주 인테리어 시장 분석: 지역별 특성 및 주요 아파트 단지 정보</h2>
+        <p>파주시는 운정신도시, 금촌지구, 문산지구 등 신도시와 구도심이 혼재된 지역적 특성을 가집니다. 각 지역별 주거 환경의 차이를 이해하는 것이 성공적인 인테리어의 첫걸음입니다. 인테리어 견적 비교 시, 단순히 <span class="highlight">저렴한곳</span>을 찾기보다 해당 지역의 특성을 잘 이해하는 전문 업체를 선정하는 것이 중요합니다.</p>
+
+        <h3>1. 운정신도시 (동패동, 야당동, 목동동, 와동동 등)</h3>
+        <p>운정신도시는 최근 10년 이내에 지어진 신축 아파트 단지가 많아 부분 인테리어를 선호하는 경우가 많습니다. <span class="highlight">운정 아모리움, 한빛마을 5단지</span> 등 30~40평대 아파트가 주를 이루며, 주로 주방 구조 변경(아일랜드 확장), 거실 아트월 디자인 변경, 그리고 드레스룸이나 알파룸을 활용한 수납 공간 확장 공사가 인기입니다.</p>
+
+        <h3>2. 금촌지구 및 문산지구 (금촌동, 문산읍, 파주읍 등)</h3>
+        <p>금촌지구와 문산지구는 비교적 연식이 오래된 구축 아파트 단지가 밀집되어 있습니다. 10년 이상 된 아파트의 경우 단열 문제, 노후된 배관 및 누수 문제 해결이 시급합니다. <span class="highlight">샷시 교체, 욕실 리모델링, 베란다 확장</span> 등 올수리를 필요로 하는 경우가 많습니다.</p>
+
+        <h3>3. 교하지구 및 기타 지역 (교하동, 탄현면, 광탄면 등)</h3>
+        <p>교하지구는 주택 및 타운하우스 단지가 많아, 주택 인테리어에 대한 수요가 높습니다. 아파트와 달리 구조 변경이 자유롭고, 층고를 활용한 디자인이나 마당 조경 공사가 함께 이루어지는 경우가 많습니다. 상업 공간 인테리어 역시 파주 LCD 산업단지 인근이나 주요 상권에서 활발합니다.</p>
+
+        <p>이러한 지역적 특성을 고려하여, 파주 인테리어 전문 업체들은 신축 아파트에 특화된 디자인 컨설팅부터 구축 아파트의 <span class="highlight">그린 리모델링</span>까지 다양한 서비스를 제공하고 있습니다. 단순히 <span class="highlight">싼곳</span>을 찾기보다 <span class="highlight">시공 장단점</span>을 명확히 비교하는 것이 중요합니다.</p>
+    </section>
+
+    <section id="cost-guide">
+        <span id="cost-guide-anchor" class="anchor"></span>
+        <h2>파주 인테리어 비용 가이드 (2026년 기준)</h2>
+        <p>인테리어 비용은 공사 범위, 자재 등급, 평형대, 그리고 업체별 마진에 따라 천차만별입니다. 특히 <span class="highlight">평당 얼마</span>라는 단일 견적은 의미가 없으며, 정확한 <span class="highlight">예상 금액</span>을 산정하기 위해서는 세부 공사 항목별 견적 비교가 필수입니다. 다음은 파주 지역 아파트 인테리어 평균 비용을 바탕으로 2026년 기준 예상 비용을 분석한 표입니다.</p>
+
+        <h3>1. 평형대별 인테리어 예상 비용 (2026년)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>평형대</th>
+                    <th>부분 인테리어 (가성비)</th>
+                    <th>전체 인테리어 (표준)</th>
+                    <th>전체 인테리어 (고급/럭셔리)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>20평대 (약 66㎡)</td>
+                    <td>1,000만 원 ~ 1,800만 원</td>
+                    <td>2,000만 원 ~ 3,500만 원</td>
+                    <td>4,000만 원 이상</td>
+                </tr>
+                <tr>
+                    <td>30평대 (약 84㎡)</td>
+                    <td>1,500만 원 ~ 2,500만 원</td>
+                    <td>3,000만 원 ~ 5,000만 원</td>
+                    <td>5,500만 원 이상</td>
+                </tr>
+                <tr>
+                    <td>40평대 (약 100㎡ 이상)</td>
+                    <td>2,000만 원 ~ 3,000만 원</td>
+                    <td>4,500만 원 ~ 7,000만 원</td>
+                    <td>7,500만 원 이상</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="small-info">※ 상기 <span class="highlight">예상 견적</span>은 2026년 기준 일반적인 <span class="highlight">평균 비용</span>을 나타내며, 시공 범위 및 자재 종류에 따라 크게 달라질 수 있습니다. 특히 샷시 교체, 욕실 확장, 맞춤 가구 제작 등 별도 공사 항목은 <span class="highlight">추가 비용</span>이 발생합니다.</p>
+
+        <h3>2. 인테리어 견적 비교 시 반드시 확인해야 할 5가지</h3>
+        <ul>
+            <li><strong>시공 범위 명확화:</strong> '올수리'라는 모호한 표현 대신 철거, 목공, 전기, 타일, 도장, 바닥 등 공정별 세부 항목을 구체적으로 확인해야 합니다.</li>
+            <li><strong>자재 등급 및 브랜드 명시:</strong> A업체와 B업체의 견적 <span class="highlight">차이점</span>은 대부분 자재 등급에서 발생합니다. LX하우시스, 한샘, KCC 등 브랜드 제품 여부와 등급을 명시하도록 요청해야 합니다.</li>
+            <li><strong>추가 비용 발생 여부 확인:</strong> 공사 도중 예상치 못한 추가 비용(예: 숨겨진 누수, 배관 문제 등)이 발생할 경우 처리 방식과 비용 상한선을 미리 합의해야 합니다.</li>
+            <li><strong>A/S 및 하자 보증 기간:</strong> 인테리어 공사는 1년 이내에 하자가 발생하는 경우가 많습니다. <span class="highlight">하자 보증 기간</span>과 보상 범위를 명확히 계약서에 포함해야 합니다.</li>
+            <li><strong>업체 신뢰도 확인:</strong> 사업자등록증, 전문 건설업 면허 보유 여부, <span class="highlight">내돈내산 후기</span> 등을 통해 업체의 전문성을 확인합니다.</li>
+        </ul>
+
+        <a href="#contact" class="btn-cta">무료 견적 상담 받고 비용 절감하기</a>
+    </section>
+
+    <section id="top5-companies">
+        <span id="top5-companies-anchor" class="anchor"></span>
+        <h2>파주 인테리어 추천 업체 TOP 5 (2026년 상위 랭크)</h2>
+        <p>파주 지역에서 다년간의 경험과 전문성을 바탕으로 고객 만족도가 높은 인테리어 업체 5곳을 엄선하여 소개합니다. 이들 업체는 <span class="highlight">시공 장점</span>과 <span class="highlight">차별점</span>을 명확히 갖추고 있으며, 단순한 <span class="highlight">싼곳</span>보다는 합리적인 <span class="highlight">가격</span>에 고품질 서비스를 제공합니다. (업체명은 검색 결과를 바탕으로 가상의 순위를 매긴 것입니다.)</p>
+
+        <ol>
+            <li>
+                <h3>1. 밀알디자인 (Milarl Design Interior)</h3>
+                <p><strong>특징:</strong> 파주 지역 주거 공간, 상업 공간, 사무 공간 등 다양한 프로젝트 경험을 보유한 <span class="highlight">종합 인테리어 전문 업체</span>. 3D 도면 작업 및 컨설팅을 통해 시공 전 고객과 디자인을 명확히 공유하여 만족도가 높음. 운정신도시 아파트 인테리어 사례 다수 보유.</p>
+                <p><strong>장점:</strong> 전문성과 노하우를 바탕으로 <span class="highlight">A/S 관리</span>가 체계적이며, 타 업체 견적과 비교하여 합리적인 <span class="highlight">비용</span> 제안 가능.</p>
+            </li>
+            <li>
+                <h3>2. 파주삼성인테리어 (Paju Samsung Interior)</h3>
+                <p><strong>특징:</strong> 금촌, 문산 지역의 <span class="highlight">구축 아파트 리모델링</span>에 강점을 가지는 업체. 노후된 아파트의 단열, 배관, 샷시 교체 등 <span class="highlight">기본 공사</span>에 대한 전문성이 높음.</p>
+                <p><strong>장점:</strong> 노후 주택의 고질적인 문제를 해결하는 기술력이 우수하며, <span class="highlight">저렴한곳</span>을 찾다가 발생할 수 있는 <span class="highlight">하자</span> 위험을 줄일 수 있음.</p>
+            </li>
+            <li>
+                <h3>3. 비비르디자인 (Vivir Design)</h3>
+                <p><strong>특징:</strong> 감각적인 디자인과 트렌디한 시공 사례로 <span class="highlight">젊은 고객층에게 인기</span>가 높은 업체. 파주 동문굿모닝힐 등 신축 아파트 인테리어 <span class="highlight">내돈내산 후기</span>가 많음.</p>
+                <p><strong>장점:</strong> 디자인 만족도가 높으며, 3D 시뮬레이션을 통해 시공 후 모습을 미리 예측할 수 있어 <span class="highlight">장점</span>이 뚜렷함.</p>
+            </li>
+            <li>
+                <h3>4. 파주 신간인테리어</h3>
+                <p><strong>특징:</strong> 주거 공간뿐만 아니라 상업 공간, 특히 <span class="highlight">식당 인테리어</span>에 특화된 업체. <span class="highlight">전문 설비</span>가 필요한 주방 공간 및 가구 제작에 강점을 가짐.</p>
+                <p><strong>장점:</strong> 다양한 상업 공간 경험을 통해 독특하고 효율적인 공간 디자인을 제안하며, <span class="highlight">가구 제작</span> 노하우가 탁월함.</p>
+            </li>
+            <li>
+                <h3>5. 굿데이이사서비스 (리모델링 연계 서비스)</h3>
+                <p><strong>특징:</strong> 인테리어와 이사를 원스톱으로 처리할 수 있는 연계 서비스를 제공하는 곳. 인테리어 시공 후 <span class="highlight">입주 청소</span> 및 <span class="highlight">가구 배치</span>까지 원활하게 지원.</p>
+                <p><strong>장점:</strong> 이사 시기와 인테리어 공사 기간을 효율적으로 조율하여 시간과 비용을 절감할 수 있는 <span class="highlight">장점</span>이 있음.</p>
+            </li>
+        </ol>
+        <p>※ 주의: 위 업체 추천은 온라인 후기 및 검색 데이터를 기반으로 작성된 정보입니다. 견적 비교 시 반드시 2~3곳 이상의 업체를 통해 <span class="highlight">견적 차이점</span>을 확인해야 합니다.</p>
+    </section>
+
+    <section id="checklist">
+        <span id="checklist-anchor" class="anchor"></span>
+        <h2>하자 없는 인테리어를 위한 필수 체크리스트 (2026년 업데이트)</h2>
+        <p>인테리어 공사는 큰돈이 들어가는 만큼 신중한 준비가 필요합니다. 공사 시작 전 <span class="highlight">주의사항</span>을 철저히 확인하여 <span class="highlight">추가 비용</span> 발생을 막고 만족스러운 결과를 얻으세요. 다음은 2026년 인테리어 공사 시 반드시 챙겨야 할 핵심 <span class="highlight">체크리스트</span>입니다.</p>
+
+        <h3>1. 공사 전 준비 단계 (착공 2주 전)</h3>
+        <ul>
+            <li><strong>주민 동의서 및 행위허가:</strong> 아파트의 경우 관리사무소에 방문하여 인테리어 공사 주민 동의서를 받고, 필요시 관할 지자체에 <span class="highlight">행위허가</span>를 신청해야 합니다. (특히 내력벽 철거, 샷시 교체, 발코니 확장 등은 필수)</li>
+            <li><strong>시공 일정 조율:</strong> 공사 기간과 예상 완료일을 명확히 하고, 이웃 세대의 불편을 최소화하기 위해 공사 시간을 조율합니다.</li>
+            <li><strong>자재 및 디자인 최종 확정:</strong> 시공 1주 전까지 상세 도면과 사용할 자재(벽지, 마루, 타일, 조명)를 최종 확정합니다.</li>
+            <li><strong>예비비 확보:</strong> 예상 <span class="highlight">견적</span>의 10~20%를 예비비로 확보하여 예상치 못한 <span class="highlight">추가 비용</span>에 대비합니다.</li>
+        </ul>
+
+        <h3>2. 공사 중 점검 단계 (공정별)</h3>
+        <ul>
+            <li><strong>철거 및 목공:</strong> 철거 범위가 계약과 일치하는지 확인하고, 목공 작업 시 수평 및 수직 마감 상태를 점검합니다.</li>
+            <li><strong>전기 및 조명:</strong> 콘센트 위치, 조명 스위치 위치를 미리 정한 도면대로 시공하는지 확인합니다.</li>
+            <li><strong>타일 및 욕실:</strong> 타일 시공 전 방수 작업을 꼼꼼히 했는지, 물매(배수가 잘 되도록 기울어진 정도)가 맞는지 확인합니다.</li>
+            <li><strong>도장 및 마루:</strong> 마루 시공 시 바닥 면을 깨끗하게 정리했는지 확인하고, 도장 작업은 습도가 낮은 날 진행하는 것이 좋습니다.</li>
+        </ul>
+
+        <h3>3. 공사 완료 후 점검 단계 (하자 보수)</h3>
+        <ul>
+            <li><strong>마감 상태 확인:</strong> 벽지 들뜸, 타일 줄눈 시공, 실리콘 마감 등 육안으로 확인 가능한 부분의 완성도를 꼼꼼히 점검합니다.</li>
+            <li><strong>A/S 계약서 확인:</strong> 공사가 끝난 후에도 <span class="highlight">A/S 보장 기간</span>과 범위를 명시한 계약서를 반드시 보관합니다.</li>
+        </ul>
+
+        <p>파주 인테리어는 수많은 변수가 존재하는 만큼, 위 <span class="highlight">체크리스트</span>를 통해 <span class="highlight">장단점</span>을 미리 파악하고 전문 업체와 소통하는 것이 중요합니다.</p>
+    </section>
+
+    <section id="contact">
+        <span id="contact-anchor" class="anchor"></span>
+        <h2>파주 인테리어 무료 견적 상담 문의</h2>
+        <p>파주 아파트 인테리어 <span class="highlight">견적</span>이 궁금하신가요? 지금 바로 <span class="success">무료 상담</span>을 신청하시면 파주 지역 전문 업체들의 <span class="highlight">비용</span>과 <span class="highlight">장단점</span>을 비교하여 최적의 솔루션을 제공해 드립니다. <span class="highlight">저렴한곳</span>을 찾다가 후회하지 않도록 꼼꼼한 <span class="highlight">내돈내산 후기</span> 기반 컨설팅을 진행합니다.</p>
+
+        <form action="/submit" method="POST" style="max-width:600px; margin:auto;">
+            <h3>견적 문의 양식</h3>
+            <label for="name">이름<span style="color:red;">*</span></label>
+            <input type="text" id="name" name="name" required placeholder="예: 홍길동" />
+
+            <label for="phone">연락처<span style="color:red;">*</span></label>
+            <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" pattern="[0-9\-]+" />
+
+            <label for="address">시공 희망 주소<span style="color:red;">*</span></label>
+            <input type="text" id="address" name="address" required placeholder="예: 파주시 운정동 한빛마을 5단지" />
+
+            <label for="property-type">주거 형태<span style="color:red;">*</span></label>
+            <select id="property-type" name="property_type" required>
+                <option value="">선택하세요</option>
+                <option value="아파트">아파트</option>
+                <option value="빌라/다세대">빌라/다세대</option>
+                <option value="주택/단독주택">주택/단독주택</option>
+                <option value="오피스텔">오피스텔</option>
+                <option value="상업공간">상업공간</option>
+            </select>
+
+            <label for="area">평형대<span style="color:red;">*</span></label>
+            <select id="area" name="area" required>
+                <option value="">선택하세요</option>
+                <option value="20평대">20평대 (20~29평)</option>
+                <option value="30평대">30평대 (30~39평)</option>
+                <option value="40평대">40평대 (40~49평)</option>
+                <option value="50평대이상">50평대 이상</option>
+                <option value="기타">기타 (상업공간 등)</option>
+            </select>
+
+            <label for="scope">인테리어 범위<span style="color:red;">*</span></label>
+            <select id="scope" name="scope" required>
+                <option value="">선택하세요</option>
+                <option value="전체 리모델링 (올수리)">전체 리모델링 (올수리)</option>
+                <option value="부분 리모델링 (특정 공간)">부분 리모델링 (특정 공간)</option>
+                <option value="주방/욕실만">주방/욕실만</option>
+                <option value="샷시/단열 공사만">샷시/단열 공사만</option>
+            </select>
+
+            <label for="date">희망 시공 시기</label>
+            <input type="text" id="date" name="date" placeholder="예: 2026년 3월 예정" />
+
+            <label for="budget">예상 예산 범위</label>
+            <input type="text" id="budget" name="budget" placeholder="예: 3,000만 원 내외" />
+
+            <label for="message">추가 요청 사항</label>
+            <textarea id="message" name="message" rows="4" placeholder="예: 구체적인 희망 스타일(모던, 내추럴 등) 및 특이사항"></textarea>
+
+            <button type="submit" class="btn-cta">견적 문의 보내기</button>
+        </form>
+    </section>
+
+
+
+  
